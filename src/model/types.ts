@@ -1,6 +1,6 @@
 import { BaseQueryFn } from '@reduxjs/toolkit/query';
 import { AxiosRequestConfig } from 'axios';
-import { ApplicationBoard } from '~/utils';
+import { ApplicationBoard, Cell } from '~/utils';
 
 export type ApiResponseType = {
   name: string;
@@ -11,25 +11,9 @@ export type CurrentApplicationState = {
   currentApplication: ApplicationBoard | null;
 };
 
-export type HoveredCellType = {
-  column: number;
-  row: number;
-  id: string;
-};
-
-export type HoveredCellsStateType = {
-  hoveredCells: HoveredCellType[];
-};
-
-export type CellType = {
-  readonly id: string;
-  readonly column: number;
-  readonly row: number;
-};
-
-export type RowType = {
-  row: CellType[];
-  rowId: string;
+export type ColumnsType = {
+  column: Cell[];
+  columnId: string;
 };
 
 export type AxiosBaseQueryType = (baseUrl: string) => BaseQueryFn<AxiosBaseQueryFnType>;

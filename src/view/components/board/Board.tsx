@@ -1,30 +1,23 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { HoveredCellType } from '~/model';
-import { currentApplicationSelector } from '~/model/slices';
-import { onHover } from '~/model/slices/hoveredCellsSlice';
+import { currentApplicationSelector, updateApplication } from '~/model/slices';
 import { StyledBoard } from '~/view/components/board/Board.styles';
 
 export const Board = () => {
   const { currentApplication } = useSelector(currentApplicationSelector);
   const dispatch = useDispatch();
 
-  const handleHover = (target: EventTarget, cell: HoveredCellType) => {
-    const element = target as Element;
-    element.classList.toggle('hovered');
-    dispatch(onHover(cell));
-  };
-
   return (
     <StyledBoard>
-      {currentApplication?.rows.map(({ rowId, row }) => (
-        <div key={rowId} className='row'>
-          {row.map((cell) => (
+      {currentApplication?.columns.map(({ columnId, column }) => (
+        <div key={columnId} className='column'>
+          {column.map((cell) => (
             <div
               key={cell.id}
-              className='cell'
-              onMouseEnter={({ target }) => {
-                handleHover(target, cell);
+              className={`cell${cell.isHovered ? ' hovered' : ''}`}
+              onMouseEnter={() => {
+                cell.isHovered = !cell.isHovered;
+                dispatch(updateApplication(currentApplication));
               }}
             ></div>
           ))}

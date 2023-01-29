@@ -1,7 +1,7 @@
 import React, { FormEventHandler, useRef } from 'react';
 import { useDispatch } from 'react-redux';
 import { useGetApplicationModeQuery } from '~/model';
-import { initApplication, resetHoveredCellsState } from '~/model/slices';
+import { initApplication } from '~/model/slices';
 import { StyledHeader } from '~/view/components/header/Header.styles';
 
 export const Header = (): JSX.Element => {
@@ -13,7 +13,6 @@ export const Header = (): JSX.Element => {
     event.preventDefault();
     if (selectRef && selectRef.current && selectRef.current.value) {
       dispatch(initApplication(parseInt(selectRef.current.value)));
-      dispatch(resetHoveredCellsState());
     }
   };
 

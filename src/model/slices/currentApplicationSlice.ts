@@ -12,10 +12,13 @@ export const currentApplicationSlice = createSlice({
     initApplication: (state, { payload }) => {
       state.currentApplication = new ApplicationBoard(payload);
     },
+    updateApplication: (state, { payload }) => {
+      state.currentApplication = { ...payload };
+    },
   },
 });
 
-export const { initApplication } = currentApplicationSlice.actions;
+export const { initApplication, updateApplication } = currentApplicationSlice.actions;
 export const currentApplicationSelector = (
   state: ReturnType<typeof rootReducer>,
 ): CurrentApplicationState => state.currentApplication;
